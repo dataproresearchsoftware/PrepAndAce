@@ -1,7 +1,7 @@
 {
   "recommendations": [
     "dsznajder.es7-react-js-snippets",
-    "gamunu.vscode-yarn",
+    // "gamunu.vscode-yarn",
     "jasonnutter.search-node-modules",
     "mrmlnc.vscode-scss",
     "syler.sass-indented",
