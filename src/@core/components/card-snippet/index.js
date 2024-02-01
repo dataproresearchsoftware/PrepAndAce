@@ -54,7 +54,7 @@ const CardSnippet = props => {
   const handleClick = () => {
     clipboard.copy(codeToCopy())
     toast.success('The source code has been copied to your clipboard.', {
-      duration: 2000
+      duration: 20000
     })
   }
 
