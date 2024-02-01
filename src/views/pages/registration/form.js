@@ -68,7 +68,6 @@ export const Form = ({ isOpen = true, onClose, modelMaxWidth = 500, amountPKR = 
   const initialized = async () => {
     //Bind Country 1 List
     const response = await getCountryAPI()
-    console.log('Country response', response)
     if (response?.error) {
       toast.error(response.error.message)
 
@@ -100,7 +99,6 @@ export const Form = ({ isOpen = true, onClose, modelMaxWidth = 500, amountPKR = 
 
   const onSubmit = async data => {
     setStates({ ...states, isSubmit: true })
-    console.log('submit')
 
     const response = await postStudentRegistrationAPI({
       data: {

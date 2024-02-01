@@ -4,7 +4,6 @@ export default async function handler(req, res) {
   const client = new MongoClient(process.env.NEXT_PUBLIC_MONGO_URI)
 
   try {
-    console.log('client try')
     await client.connect()
 
     const db = client.db()

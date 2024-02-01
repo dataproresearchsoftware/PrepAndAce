@@ -1,7 +1,6 @@
 import { MongoClient } from 'mongodb'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
-import { resolve } from 'styled-jsx/css'
 
 const KEY = process.env.NEXT_PUBLIC_CURRENCY_API_KEY
 const tokenExpiry = process.env.NEXT_PUBLIC_TOKEN_EXPIRY
@@ -137,11 +136,7 @@ export default async function handler(req, res) {
             const { dateTime, expiryTime } = data[0]
             const currentDate = Date()
 
-            // console.log('currentDate', currentDate)
-            // console.log('dateTime', new Date(dateTime))
-            // console.log('expiryTime', new Date(expiryTime))
             const isValid = true //Date(dateTime) < new Date(currentDate) && new Date(currentDate) < new Date(expiryTime)
-            console.log('verifyToken', isValid)
             if (verifyToken.userId && isValid) {
               const payload = {
                 userId: verifyToken.userId,
@@ -149,7 +144,7 @@ export default async function handler(req, res) {
               }
 
               /* Sign token */
-              jwt.sign(
+              await jwt.sign(
                 payload,
                 KEY,
                 {
@@ -190,9 +185,7 @@ export default async function handler(req, res) {
         res.status(405).json({ error: 'Unsupported HTTP method' })
     }
   } catch (error) {
-    throw error
+    res.status(500).json(error)
   }
   await client.close()
-
-  return resolve()
 }

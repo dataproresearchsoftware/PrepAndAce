@@ -26,7 +26,6 @@ export const CourseDetail = () => {
     setCourseVideoList(courseVideoData.data)
     const data = courseVideoData.data.find(i => i.isPlay === true)
     const curr_video = data ?? courseVideoData.data[0]
-    console.log('curr_video', curr_video)
 
     setVideo(curr_video)
     let vid = document.getElementById('courseVideo')
@@ -75,7 +74,6 @@ export const CourseDetail = () => {
       config: { skipToast: true }
     })
 
-    console.log('resp?.data', resp?.data)
     setVideo(resp?.data)
     setVideoPlayed(0)
 

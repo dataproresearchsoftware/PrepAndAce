@@ -32,7 +32,6 @@ const PaymentStatus = () => {
   }, 10000)
 
   const handleClipboard = params => {
-    console.log(params)
     if (params?.target?.innerText?.length > 0) {
       clipboard.copy(params.target.innerText)
     }
@@ -54,12 +53,9 @@ const PaymentStatus = () => {
   }
 
   const setLogin = async () => {
-    console.log('setLogin')
     const email = window.localStorage.getItem('email')
-    console.log('email', email)
     if (email) {
       const userResponse = await axios.get(`${process.env.NEXT_PUBLIC_BASEURL_LOCAL}api/users?user_name=${email}`)
-      console.log('userResponse', userResponse)
       if (userResponse.data.length > 0) {
         auth.login({ username: email, password: userResponse?.data[0]?.password, rememberMe: true }, () => {
           setError('username', {

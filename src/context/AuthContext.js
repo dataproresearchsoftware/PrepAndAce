@@ -29,7 +29,7 @@ const AuthProvider = ({ children }) => {
   // ** States
   const [user, setUser] = useState(defaultProvider.user)
   const [loading, setLoading] = useState(defaultProvider.loading)
-  const requestTimeout = 5000
+  const requestTimeout = 10000
   const [keyUpTime, setKeyUpTime] = useState(Date())
 
   // ** Hooks
@@ -59,7 +59,7 @@ const AuthProvider = ({ children }) => {
             toast.error('0 Session has been expired, Please Re-login', {
               position: 'top-center',
               style: { padding: 10, fontSize: 24, minWidth: 200 },
-              duration: 10000
+              duration: 20000
             })
 
             return
@@ -70,7 +70,7 @@ const AuthProvider = ({ children }) => {
           toast.error('1 Session has been expired, Please Re-login', {
             position: 'top-center',
             style: { padding: 10, fontSize: 24, minWidth: 200 },
-            duration: 10000
+            duration: 20000
           })
 
           setLoading(false)
@@ -98,7 +98,6 @@ const AuthProvider = ({ children }) => {
         setKeyUpTime(Date())
       }
       if (date.getHours() != newkeyUpTime.getHours() && date.getMinutes() >= newkeyUpTime.getMinutes() + 25) {
-        console.log('Call Auth')
         initAuth()
         setKeyUpTime(Date())
       }
