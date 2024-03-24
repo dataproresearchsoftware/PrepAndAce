@@ -29,7 +29,7 @@ const AuthProvider = ({ children }) => {
   // ** States
   const [user, setUser] = useState(defaultProvider.user)
   const [loading, setLoading] = useState(defaultProvider.loading)
-  const requestTimeout = 5000
+  const requestTimeout = 25000
   const [keyUpTime, setKeyUpTime] = useState(Date())
 
   // ** Hooks

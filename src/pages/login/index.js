@@ -1,5 +1,6 @@
 // ** React Imports
 import { useState } from 'react'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
 
 // ** Next Imports
 import Link from 'next/link'
@@ -43,10 +44,20 @@ import BlankLayout from 'src/@core/layouts/BlankLayout'
 
 // ** Demo Imports
 import FooterIllustrationsV2 from 'src/views/pages/auth/FooterIllustrationsV2'
-import { Grid } from '@mui/material'
+import { Grid, Zoom } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
 import { toast } from 'react-hot-toast'
 import { clientConfig } from 'src/configs/clientConfig'
+import BlankLayoutWithAppBar from 'src/@core/layouts/BlankLayoutWithAppBar'
+import { TypeAnimation } from 'react-type-animation'
+
+// Styled component for the image
+const Img = styled('img')(({ theme }) => ({
+  position: 'absolute',
+  zIndex: -1,
+  height: '100%',
+  width: '100%'
+}))
 
 // ** Styled Components
 const LoginIllustration = styled('img')(({ theme }) => ({
@@ -65,13 +76,17 @@ const LoginIllustration = styled('img')(({ theme }) => ({
 const RightWrapper = styled(Box)(({ theme }) => ({
   width: '100%',
   [theme.breakpoints.up('md')]: {
-    maxWidth: 450
+    maxWidth: 470
   },
   [theme.breakpoints.up('lg')]: {
-    maxWidth: 600
+    maxWidth: 470
   },
   [theme.breakpoints.up('xl')]: {
-    maxWidth: 750
+    maxWidth: 470,
+    display: 'flex',
+    justifyContent: 'end',
+    position: 'absolute',
+    right: 0
   }
 }))
 
@@ -142,79 +157,84 @@ const LoginPage = () => {
   const imageSource = skin === 'bordered' ? 'auth-v2-login-illustration-bordered' : 'auth-v2-login-illustration'
 
   return (
-    <Box
-      className='content-right'
-      sx={{
-        flex: 1,
-        alignItems: 'flex-start',
-        display: 'flex',
-        position: 'relative'
-      }}
-    >
+    <Box className='content-right'>
       {!hidden ? (
-        <Box>
-          <Grid container>
-            <Grid
-              item
-              md={6}
-              xs={12}
-              sx={{
-                flex: 1,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'start',
-                padding: 10
+        <Box sx={{ width: '100%', height: '100%' }} textAlign='center'>
+          <Box
+            display='flex'
+            justifyContent='center'
+            sx={{
+              height: '100vh',
+              width: '70%'
+            }}
+          >
+            <Img alt='' src={`/images/Brandenburg-Gate-2-b.webp`} />
+            <div
+              style={{
+                position: 'absolute',
+                zIndex: -1,
+                opacity: 0.7,
+                backgroundColor: '#0332cb',
+                width: '100%',
+                height: '100%'
               }}
-            >
-              <div>
-                <img src={'/images/logo.png'} height='100' alt={''} />
-                <Typography sx={{ color: '#7367f0', mb: 1.5, fontWeight: 500, fontSize: '12' }}>PrepAndAce</Typography>
-              </div>
+            ></div>
+
+            <Grid container>
+              <Grid item xs={12} pt={10} textAlign='center'>
+                <Zoom in={true} style={{ transitionDelay: '500ms' }}>
+                  <Box fullWidth>
+                    <ThemeProvider theme={theme}>
+                      <IconButton>
+                        <Box
+                          width={150}
+                          height={150}
+                          display='flex'
+                          justifyContent='center'
+                          alignItems='center'
+                          borderRadius={5}
+                          bgcolor='#fff'
+                          boxShadow={5}
+                        >
+                          <Grid container>
+                            <Grid
+                              item
+                              xs={12}
+                              sx={{
+                                textAlign: 'center'
+                              }}
+                            >
+                              <img src={'/images/logo.png'} height='100' alt={''} />
+                            </Grid>
+                          </Grid>
+                        </Box>
+                      </IconButton>
+                      <Typography variant='h3' sx={{ color: '#fff', textDecoration: 'underline', my: 10 }}>
+                        PrepAndAce
+                      </Typography>
+                      <Typography variant='h4' color='#fdfeff'>
+                        Gateway to a bright future.
+                      </Typography>
+                      <Typography variant='h4' color='#fdfeff'>
+                        Study in Germany.
+                      </Typography>
+                    </ThemeProvider>
+                  </Box>
+                </Zoom>
+              </Grid>
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-              sx={{
-                flex: 1,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'end',
-                padding: 10
-              }}
-            >
-              <img src={`/images/${clientConfig.picture}`} height='100' alt={''} />
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              sx={{
-                flex: 1,
-                display: 'flex',
-                position: 'relative',
-                alignItems: 'center',
-                textAlign: 'center',
-                justifyContent: 'center',
-                bottom: 0,
-                backgroundColor: 'customColors.bodyBg'
-              }}
-            >
-              <img width='60%' src={'/images/loginBackground.png'} alt={''} />
-            </Grid>
-          </Grid>
-          {/* <LoginIllustration alt='login-illustration' src={`/images/loginBackground.png`} /> */}
-          <FooterIllustrationsV2 />
+          </Box>
         </Box>
       ) : null}
       <RightWrapper>
         <Box
           sx={{
             p: [6, 12],
-            height: '100%',
+            height: '100vh',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            marginTop: !hidden ? 25 : 0
+            bgcolor: '#fff'
           }}
         >
           <Box sx={{ width: '100%', maxWidth: 350, alignItems: 'flex-start' }}>
@@ -254,7 +274,7 @@ const LoginPage = () => {
             ) : null}
             <Box sx={{ my: 6 }}>
               <Typography sx={{ mb: 1.5, fontWeight: 500, fontSize: '1.625rem', lineHeight: 1.385 }}>
-                {`Welcome to ${themeConfig.templateName}! 👋🏻`}
+                {`Welcome to ${themeConfig.templateName}!`}
               </Typography>
               <Typography sx={{ color: 'text.secondary' }}>
                 Please sign-in to your account and start your session
@@ -347,9 +367,17 @@ const LoginPage = () => {
               >
                 Login
               </LoadingButton>
-              {/* <Button fullWidth size='large' type='submit' variant='contained' sx={{ mb: 4 }}>
-                Login
-              </Button> */}
+              <Divider />
+              <Box fullWidth textAlign='center' p={5}>
+                <Grid container spacing={3}>
+                  <Grid item xs={12}>
+                    <Link href='/registration'>Create Account</Link>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Link href='/'>Back to Home</Link>
+                  </Grid>
+                </Grid>
+              </Box>
             </form>
           </Box>
         </Box>

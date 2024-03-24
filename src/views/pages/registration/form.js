@@ -146,7 +146,7 @@ export const Form = ({ isOpen = true, onClose, modelMaxWidth = 500, amountPKR = 
     setStates({ ...states, isSubmit: false })
   }
 
-  const submtFrom = () => (
+  const SubmitFrom = () => (
     <>
       {/* <CardHeader title={pageTitle} /> */}
       <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
@@ -501,7 +501,7 @@ export const Form = ({ isOpen = true, onClose, modelMaxWidth = 500, amountPKR = 
                 <Typography variant='h4'>Registration</Typography>
               </Grid>
               <Grid item xs={12}>
-                {submtFrom()}
+                <SubmitFrom />
               </Grid>
             </Grid>
           </Grid>
@@ -511,9 +511,10 @@ export const Form = ({ isOpen = true, onClose, modelMaxWidth = 500, amountPKR = 
         <Dialog
           open={isOpen}
           onClose={onClose}
+          maxWidth={700}
           aria-labelledby='user-view-edit'
           aria-describedby='user-view-edit-description'
-          sx={{ '& .MuiPaper-root': { width: '100%', maxWidth: modelMaxWidth, bgcolor: 'black' } }}
+          sx={{ '& .MuiPaper-root': { width: '100%', maxWidth: modelMaxWidth } }}
         >
           <DialogTitle
             id='user-view-edit'
@@ -526,16 +527,8 @@ export const Form = ({ isOpen = true, onClose, modelMaxWidth = 500, amountPKR = 
           </DialogTitle>
           <DialogContent>
             <Grid container>
-              <Grid
-                item
-                xs={12}
-                p={10}
-                justifyContent='center'
-                alignItems='center'
-                sx={{ maxWidth: 500 }}
-                display='flex'
-              >
-                {submtFrom()}
+              <Grid item xs={12} p={10} justifyContent='center' alignItems='center' display='flex'>
+                <SubmitFrom />
               </Grid>
             </Grid>
           </DialogContent>

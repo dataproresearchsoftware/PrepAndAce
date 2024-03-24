@@ -43,7 +43,8 @@ export default async function handler(req, res) {
   const client = new MongoClient(process.env.NEXT_PUBLIC_MONGO_URI)
 
   await client.connect()
-  const db = client.db()
+  const db = client.db('WA')
+  console.log('db', db)
   let result = []
   let reg = []
   const { method } = req
@@ -59,8 +60,9 @@ export default async function handler(req, res) {
               error: 'Request missing username or password'
             })
           }
-
+          console.log('user_name, password, user_type', user_name, password, user_type)
           result = await db.collection('users').find({ user_name, password, user_type, active: 'true' }).toArray()
+          console.log('result', result)
 
           /* Check user email in database */
           const user = result[0]

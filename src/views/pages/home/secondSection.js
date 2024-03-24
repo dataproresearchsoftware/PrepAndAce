@@ -8,19 +8,19 @@ const SecondSection = () => {
   return (
     <Grid container>
       <Grid item xs={12}>
-        <Box sx={{ width: '100%', backgroundColor: '#000000' }}>
+        <Box sx={{ width: '100%', bgcolor: '#0332cb' }}>
           <Grid container>
             <Grid item lg={5} xs={12}>
-              <Box p='5'>
-                <img style={{ height: 630, width: '100%' }} src='/images/176_2x.webp' alt='' />
-              </Box>
+              <img style={{ height: 630, width: '100%' }} src='/images/176_2x.webp' alt='' />
             </Grid>
             <Grid item md={7} xs={12} pt={10}>
               <Box sx={{ pl: 20, maxWidth: 600 }}>
                 <Grid container>
                   <Grid item xs={12}>
-                    <Typography variant='h4' textAlign='center' color='#fdfeff'>
-                      Gateway to a bright future. <br />
+                    <Typography variant='h4' textAlign='left' color='#fdfeff'>
+                      Gateway to a bright future.
+                    </Typography>
+                    <Typography variant='h4' textAlign='left' color='#fdfeff'>
                       Study in Germany.
                     </Typography>
                   </Grid>

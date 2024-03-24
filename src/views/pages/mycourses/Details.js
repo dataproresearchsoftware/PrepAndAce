@@ -6,7 +6,7 @@ import { getCourseListAPI, getCourseVideoDetailsAPI, postUpdateSeenPointAPI, pos
 import { useRouter } from 'next/router'
 import Icon from 'src/@core/components/icon'
 import LinearProgress from '@mui/material/LinearProgress'
-import { green } from '@mui/material/colors'
+import { blue, green } from '@mui/material/colors'
 import toast from 'react-hot-toast'
 import { useParams } from 'next/navigation'
 
@@ -23,14 +23,12 @@ export const CourseDetail = () => {
     const course = await getCourseListAPI({ courseId: id })
     const courseVideoData = await getCourseVideoDetailsAPI({ courseId: 1, active: 'true' })
     setCourseData(course?.data[0])
-    setCourseVideoList(courseVideoData.data)
+    setCourseVideoList(courseVideoData.data.sort((a, b) => a.sno - b.sno))
     const data = courseVideoData.data.find(i => i.isPlay === true)
     const curr_video = data ?? courseVideoData.data[0]
-    console.log('curr_video', curr_video)
-
     setVideo(curr_video)
     let vid = document.getElementById('courseVideo')
-    vid.currentTime = curr_video.seenPoint === curr_video.video_length ? 0 : curr_video.seenPoint
+    vid.currentTime = curr_video?.seenPoint === curr_video?.video_length ? 0 : curr_video.seenPoint
   }
   useEffect(() => {
     initialized()
@@ -117,7 +115,7 @@ export const CourseDetail = () => {
                   <video
                     id='courseVideo'
                     name='courseVideo'
-                    style={{ width: '80%', borderRadius: 15 }}
+                    style={{ width: '75%', borderRadius: 15 }}
                     controls
                     controlsList='nodownload'
                     poster={video?.poster}
@@ -148,7 +146,7 @@ export const CourseDetail = () => {
                 >
                   <Card
                     variant='outlined'
-                    sx={{ width: '100%', m: 2, p: 2, backgroundColor: item.isPlay && green[400] }}
+                    sx={{ width: '100%', m: 2, p: 2, backgroundColor: item.isPlay && blue[400] }}
                   >
                     <Grid container>
                       <Grid item xs={9}>

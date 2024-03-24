@@ -5,6 +5,14 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 
 import { Box, Button, Toolbar, Typography } from '@mui/material'
 import { TypeAnimation } from 'react-type-animation'
+import { styled } from '@mui/material/styles'
+
+// Styled component for the image
+const Img = styled('img')(({ theme }) => ({
+  position: 'absolute',
+  zIndex: -1,
+  backgroundColor: '#0045f8'
+}))
 
 const FirstSection = () => {
   const theme = createTheme()
@@ -36,14 +44,23 @@ const FirstSection = () => {
           alignItems='center'
           sx={{
             pt: { xs: 0, md: 15 },
-            backgroundImage: 'url(/images/Brandenburg-Gate-2-b.jpg)',
-            backgroundColor: '#0000007a',
             height: '90vh',
             width: '100%',
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat'
           }}
         >
+          <Img alt='' src={`/images/Brandenburg-Gate-2-b.webp`} />
+          <div
+            style={{
+              position: 'absolute',
+              zIndex: -1,
+              opacity: 0.7,
+              backgroundColor: '#0332cb',
+              width: '100%',
+              height: '100%'
+            }}
+          ></div>
           {/* <img
             src={'/images/Brandenburg-Gate-2.jpg'}
             style={{ position: 'absolute', height: 630, width: '100%', zIndex: -1 }}
@@ -54,17 +71,12 @@ const FirstSection = () => {
               <Zoom in={true} style={{ transitionDelay: '500ms' }}>
                 <Box component='main' sx={{ px: 20, maxWidth: 900 }}>
                   <ThemeProvider theme={theme}>
-                    <Typography variant='h3' textAlign='center' style={{ fontFamily: 'Roboto', color: '#fdfeff' }}>
+                    <Typography variant='h3' textAlign='center' style={{ color: '#fff' }}>
                       An assured career abroad
                     </Typography>
 
-                    <Typography
-                      variant='h6'
-                      mt={3}
-                      textAlign='center'
-                      style={{ fontFamily: 'Volkhov', color: '#fdfeff' }}
-                    >
-                      <TypeAnimation
+                    <Typography variant='h6' mt={3} textAlign='center' style={{ color: '#fff' }}>
+                      {/* <TypeAnimation
                         sequence={[
                           'A beginner,having no formal education but with a strong desire to learn,or an expert professional, want in globe the first selection choice for a potential job; PrepAndAce successfully prepares you and makes you the most desired candidate for employment in Germany. PrepAndAce teaches you the mandatory hard and soft skills, specifically designed for today’s requirements of  the German job market. PrepAndAce helps you all the way in the path of your journey to a promising  career; from getting trained,find in gand applying for a job, preparing for the job interview, completion of necessary documentation and formalities for moving and settling in Germany.Unlock and embark upon a guaranteed career in Germany.',
                           500
@@ -72,7 +84,15 @@ const FirstSection = () => {
                         wrapper='span'
                         speed={80}
                         repeat={1}
-                      />
+                      /> */}
+                      A beginner,having no formal education but with a strong desire to learn,or an expert professional,
+                      want in globe the first selection choice for a potential job; PrepAndAce successfully prepares you
+                      and makes you the most desired candidate for employment in Germany. PrepAndAce teaches you the
+                      mandatory hard and soft skills, specifically designed for today’s requirements of the German job
+                      market. PrepAndAce helps you all the way in the path of your journey to a promising career; from
+                      getting trained,find in gand applying for a job, preparing for the job interview, completion of
+                      necessary documentation and formalities for moving and settling in Germany.Unlock and embark upon
+                      a guaranteed career in Germany.
                     </Typography>
                   </ThemeProvider>
                   <div style={{ textAlign: 'end', marginTop: 20 }}>
