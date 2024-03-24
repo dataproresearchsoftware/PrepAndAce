@@ -35,6 +35,7 @@ export const axios2 = base_axios.create({
 
 export const getRequest = (url, { data = {}, config = { skipSetURL: false }, useBaseURL = true } = {}) => {
   const newUrl = config.skipSetURL ? url : setURL(url)
+  console.log('newUrl', newUrl)
   if (useBaseURL) {
     return axios({
       method: 'get',

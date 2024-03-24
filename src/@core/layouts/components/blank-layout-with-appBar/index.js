@@ -26,7 +26,7 @@ const drawerWidth = 240
 
 const navItems = [
   { sno: 1, title: 'Home', path: '/home' },
-  { sno: 2, title: 'Course', path: '/home/#courses' },
+  { sno: 2, title: 'Course', path: '/home/#courses', path2: '/mycourses/list' },
   { sno: 3, title: 'Apply for job', path: '' },
   {
     sno: 4,
@@ -93,7 +93,7 @@ function BlankLayoutAppBar(props) {
         display: 'flex'
       }}
     >
-      <AppBar component='nav' sx={{ backgroundColor: 'black' }}>
+      <AppBar component='nav' sx={{ backgroundColor: '#ffffff80' }}>
         <Toolbar>
           <IconButton
             color='inherit'
@@ -105,7 +105,7 @@ function BlankLayoutAppBar(props) {
             <MenuIcon />
           </IconButton>
           <img src={'/images/logo.png'} style={{ marginTop: 10 }} height='70' alt={''} />
-          <Typography variant='h4' color='lightblue' component='div' sx={{ flexGrow: 1 }}>
+          <Typography variant='h4' color='GrayText' component='div' sx={{ flexGrow: 1 }}>
             PrepAndAce
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
@@ -116,7 +116,7 @@ function BlankLayoutAppBar(props) {
                     <>
                       <Button
                         key={`btn-${item.sno}-${index}`}
-                        sx={{ color: 'lightblue' }}
+                        sx={{ color: 'GrayText' }}
                         id={`basic-menu-${item.sno}`}
                         aria-controls={open ? `basic-menu-${item.sno}` : undefined}
                         aria-haspopup='true'
@@ -138,16 +138,17 @@ function BlankLayoutAppBar(props) {
                           'aria-labelledby': 'basic-button'
                         }}
                       >
-                        {item?.children.map(i => {
-                          return (
-                            <MenuItem
-                              key={`mi-${i.sno}-${index}`}
-                              onClick={() => (user && item.sno === 4 ? handleLogout() : router.push(i.path))}
-                            >
-                              {user && item.sno === 4 ? 'Logout' : i.title}
-                            </MenuItem>
-                          )
-                        })}
+                        {user && item.sno === 4 ? (
+                          <MenuItem onClick={() => handleLogout()}>Logout</MenuItem>
+                        ) : (
+                          item?.children.map(i => {
+                            return (
+                              <MenuItem key={`mi-${i.sno}-${index}`} onClick={() => router.push(i.path)}>
+                                {i.title}
+                              </MenuItem>
+                            )
+                          })
+                        )}
                       </Menu>
                     </>
                   )
@@ -155,8 +156,8 @@ function BlankLayoutAppBar(props) {
                   return user && item.sno === 3 ? null : (
                     <Button
                       key={`bb-${item.sno}-${index}`}
-                      sx={{ color: 'lightblue' }}
-                      onClick={() => router.push(item.path)}
+                      sx={{ color: 'GrayText' }}
+                      onClick={() => router.push(user && item.sno === 2 ? item.path2 : item.path)}
                     >
                       {item.title}
                     </Button>

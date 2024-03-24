@@ -1,6 +1,7 @@
 import { MongoClient } from 'mongodb'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+import { resolve } from 'styled-jsx/css'
 
 const KEY = process.env.NEXT_PUBLIC_CURRENCY_API_KEY
 const tokenExpiry = process.env.NEXT_PUBLIC_TOKEN_EXPIRY
@@ -42,7 +43,8 @@ export default async function handler(req, res) {
   const client = new MongoClient(process.env.NEXT_PUBLIC_MONGO_URI)
 
   await client.connect()
-  const db = client.db()
+  const db = client.db('WA')
+  console.log('db', db)
   let result = []
   let reg = []
   const { method } = req
@@ -58,8 +60,9 @@ export default async function handler(req, res) {
               error: 'Request missing username or password'
             })
           }
-
+          console.log('user_name, password, user_type', user_name, password, user_type)
           result = await db.collection('users').find({ user_name, password, user_type, active: 'true' }).toArray()
+          console.log('result', result)
 
           /* Check user email in database */
           const user = result[0]
@@ -136,7 +139,11 @@ export default async function handler(req, res) {
             const { dateTime, expiryTime } = data[0]
             const currentDate = Date()
 
+            // console.log('currentDate', currentDate)
+            // console.log('dateTime', new Date(dateTime))
+            // console.log('expiryTime', new Date(expiryTime))
             const isValid = true //Date(dateTime) < new Date(currentDate) && new Date(currentDate) < new Date(expiryTime)
+            console.log('verifyToken', isValid)
             if (verifyToken.userId && isValid) {
               const payload = {
                 userId: verifyToken.userId,
@@ -144,7 +151,7 @@ export default async function handler(req, res) {
               }
 
               /* Sign token */
-              await jwt.sign(
+              jwt.sign(
                 payload,
                 KEY,
                 {
@@ -185,7 +192,9 @@ export default async function handler(req, res) {
         res.status(405).json({ error: 'Unsupported HTTP method' })
     }
   } catch (error) {
-    res.status(500).json(error)
+    throw error
   }
   await client.close()
+
+  return resolve()
 }

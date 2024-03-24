@@ -13,6 +13,7 @@ const usePermission = () => {
     dispatch(fetchPermissions({ page: location.pathname })).then(resp => {
       const data = resp?.payload?.permission
       const arr = data?.split(',')
+      console.log('resp>>>>>>>>>>>', arr)
       setPermissions(arr)
     })
   }, [dispatch, location.pathname])

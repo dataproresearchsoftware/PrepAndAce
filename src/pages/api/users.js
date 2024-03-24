@@ -20,6 +20,7 @@ export default async function handler(req, res) {
   const db = client.db()
   let result = []
   let data = Object.keys(req?.body).length > 0 ? req.body : req.query
+  console.log('data', data.user_id === '-1')
   switch (req.method) {
     case 'GET':
       if (data.user_id !== '-1') {

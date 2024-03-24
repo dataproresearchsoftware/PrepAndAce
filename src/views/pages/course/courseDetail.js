@@ -49,6 +49,7 @@ export const CourseDetail = () => {
   }
 
   useEffect(() => {
+    console.log(router.query)
     getVideoDetail(router.query?.id, 1)
   }, [router.query])
 
@@ -56,8 +57,10 @@ export const CourseDetail = () => {
     let course = await getCourseListAPI({ courseId: course_id })
     const currencyList = await axios(API_URL.CURRENCY)
     const PKR = currencyList.data.data.PKR.value
+    console.log('currency', currencyList.data.data.PKR.value, PKR)
     const newCourse = await course.data.map(item => ({ ...item, rate: PKR, feePKR: Math.round(item.fee * PKR) }))
     setCourseData(newCourse[0])
+    console.log('course>>>>>', newCourse)
     setCurrentVideo(courseVideos.find(i => i.course_id === newCourse[0]?.courseId && i.sno === sno))
     setPage(1)
   }

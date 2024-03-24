@@ -36,6 +36,7 @@ export default async function handler(req, res) {
         await db
           .collection('course_detail')
           .updateOne({ courseId: data?.courseId, sno: next_video_data?.sno }, { $set: next_video_data })
+        console.log('next_video_data', next_video_data)
 
         res.status(201).json(next_video_data)
       }

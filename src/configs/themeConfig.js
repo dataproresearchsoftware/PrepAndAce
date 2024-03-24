@@ -10,7 +10,7 @@ export const themeConfig = {
   // ** Layout Configs
   templateName: `${clientConfig.compname}` /* App Name */,
   layout: 'vertical' /* vertical | horizontal */,
-  mode: 'dark' /* light | dark | semi-dark /*! Note: semi-dark value will only work for Vertical Layout */,
+  mode: 'light' /* light | dark | semi-dark /*! Note: semi-dark value will only work for Vertical Layout */,
   direction: 'ltr' /* ltr | rtl */,
   skin: 'default' /* default | bordered */,
   contentWidth: 'boxed' /* full | boxed */,
